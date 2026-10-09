@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConvertLab — Unit Converter for Engineers</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Set the theme before first paint to avoid a flash of the wrong theme.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("theme"); } catch (e) {}
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#" class="logo"><span class="logo-mark">⚙</span> ConvertLab</a>
+      <nav class="nav">
+        <a href="#converter">Converter</a>
+        <a href="#power">Power</a>
+        <a href="#pricing">Pricing</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Unit conversion,<br><span class="accent">engineered.</span></h1>
+        <p class="lead">Fast, precise conversions for length, mass, pressure, energy and temperature — built for engineers and students.</p>
+        <a href="#converter" class="btn btn-primary">Start converting</a>
+      </div>
+    </section>
+
+    <section id="converter" class="container">
+      <div class="card converter">
+        <div class="tabs" role="tablist"></div>
+
+        <div class="converter-body">
+          <div class="field">
+            <label for="fromValue">From</label>
+            <input id="fromValue" type="number" inputmode="decimal" value="1" step="any">
+            <select id="fromUnit" aria-label="From unit"></select>
+          </div>
+
+          <button id="swap" class="swap" type="button" aria-label="Swap units">⇄</button>
+
+          <div class="field">
+            <label for="toValue">To</label>
+            <input id="toValue" type="text" readonly>
+            <select id="toUnit" aria-label="To unit"></select>
+          </div>
+        </div>
+
+        <p id="formula" class="formula"></p>
+      </div>
+    </section>
+
+    <section id="power" class="container tool">
+      <h2>Mechanical power</h2>
+      <p class="sub">Power from torque and rotational speed: <strong>P = T × ω</strong></p>
+      <div class="card power">
+        <div class="power-inputs">
+          <div class="field">
+            <label for="torque">Torque (T)</label>
+            <input id="torque" type="number" inputmode="decimal" value="100" step="any" min="0">
+            <select id="torqueUnit" aria-label="Torque unit">
+              <option value="1">N·m</option>
+              <option value="1.3558179483">lbf·ft</option>
+              <option value="9.80665">kgf·m</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="speed">Speed</label>
+            <input id="speed" type="number" inputmode="decimal" value="1500" step="any" min="0">
+            <select id="speedUnit" aria-label="Speed unit">
+              <option value="rpm">rpm</option>
+              <option value="rads">rad/s</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="power-results">
+          <div class="result">
+            <span class="result-label">Power</span>
+            <span id="powerKw" class="result-value">—</span>
+          </div>
+          <div class="result">
+            <span class="result-label">Horsepower</span>
+            <span id="powerHp" class="result-value">—</span>
+          </div>
+          <div class="result">
+            <span class="result-label">Angular speed (ω)</span>
+            <span id="omega" class="result-value">—</span>
+          </div>
+        </div>
+
+        <p id="powerFormula" class="formula"></p>
+      </div>
+    </section>
+
+    <section id="pricing" class="container pricing">
+      <h2>Simple pricing</h2>
+      <p class="sub">Free for students. Powerful for professionals.</p>
+      <div class="plans">
+        <div class="card plan">
+          <h3>Student</h3>
+          <p class="price">$0<span>/month</span></p>
+          <ul>
+            <li>All 5 unit categories</li>
+            <li>Live conversion</li>
+            <li>Works on any device</li>
+          </ul>
+          <a href="#converter" class="btn btn-outline">Get started</a>
+        </div>
+        <div class="card plan plan-pro">
+          <span class="badge">Popular</span>
+          <h3>Pro</h3>
+          <p class="price">$9<span>/month</span></p>
+          <ul>
+            <li>Everything in Student</li>
+            <li>Custom precision &amp; units</li>
+            <li>Conversion history</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Go Pro</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 ConvertLab</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
